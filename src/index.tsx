@@ -6,8 +6,6 @@ import WordAnalyzerApp from './WordAnalyzerApp';
 
 // Styles
 import './index.css';
-import "@fontsource/dancing-script";
-import "@fontsource/special-elite";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -6,11 +6,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       width: '100%',
+      minHeight: 'min(320px, 60vh)',
       justifyContent: 'center',
       alignItems: 'center',
-      '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
     },
   }),
 );
@@ -19,8 +17,8 @@ export default function AppLoader() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <CircularProgress style={{ color : 'white'}}/>
+    <div className={classes.root} role="status" aria-label="Loading WordAnalyzer">
+      <CircularProgress color="primary" size={40} thickness={4} />
     </div>
   );
 }

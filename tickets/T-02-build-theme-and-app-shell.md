@@ -1,9 +1,12 @@
 ---
 ticket: T-02
 title: Build the theme and application shell
-status: open
+status: done
 size: M
 depends_on: T-01
+started: 2026-09-02T13:49:04Z
+verified: 2026-09-02T13:51:05Z 3d7c2ba08651
+finished: 2026-09-02T13:51:45Z
 ---
 
 # T-02: Build the theme and application shell
@@ -24,16 +27,16 @@ Introduce the shared light visual foundation and apply it to the root shell, hea
 
 ## Acceptance Criteria
 
-- [ ] A single Material UI theme defines the shared light presentation and is applied at the application root.
-- [ ] Global CSS tokens include page, surface, text, muted text, border, shadow, spacing, and motion values.
-- [ ] The page background is light and calm; no dark-mode path is introduced.
-- [ ] The app shell uses content-driven height and remains usable on short or narrow viewports.
-- [ ] The document exposes one meaningful `main` region, an `h1` title, and a subordinate byline rather than multiple `h3` elements.
-- [ ] The loader remains centered, visible, and consistent with the new palette.
-- [ ] Empty input still cannot navigate to results, as protected by T-01.
-- [ ] No Redux, saga, analyzer, view factory, or image-fetching behavior changes.
-- [ ] No dependency or lockfile changes are introduced.
-- [ ] Automated tests and the production build pass.
+- [x] A single Material UI theme defines the shared light presentation and is applied at the application root.
+- [x] Global CSS tokens include page, surface, text, muted text, border, shadow, spacing, and motion values.
+- [x] The page background is light and calm; no dark-mode path is introduced.
+- [x] The app shell uses content-driven height and remains usable on short or narrow viewports.
+- [x] The document exposes one meaningful `main` region, an `h1` title, and a subordinate byline rather than multiple `h3` elements.
+- [x] The loader remains centered, visible, and consistent with the new palette.
+- [x] Empty input still cannot navigate to results, as protected by T-01.
+- [x] No Redux, saga, analyzer, view factory, or image-fetching behavior changes.
+- [x] No dependency or lockfile changes are introduced.
+- [x] Automated tests and the production build pass.
 
 ## Verification
 

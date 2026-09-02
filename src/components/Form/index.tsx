@@ -17,19 +17,25 @@ import './Form.css';
 
 const Form: React.FunctionComponent<IForm> = (props: IForm) => {
     return (
-        props.loader.isLoading ?
-            <AppLoader />
-            :
-            <div className='formWrapper'>
-                <Typography style={{ fontFamily: 'Dancing Script', padding: 20 }} variant="h3" component="h3" className="mainTitle">
-                    The WordAnalyzer
-                </Typography>
-                <Typography style={{ fontFamily: 'Special Elite', fontSize: 14, paddingBottom: 5 }} variant="h3" component="h3" className="mainTitle">
-                    Showcase by Alexander Gomez
-                </Typography>
-                {FormViewFactory.create(props.view)}
-
-            </div>
+        <main className='formWrapper'>
+            {props.loader.isLoading ?
+                <AppLoader />
+                :
+                <>
+                    <header className='appHeader'>
+                        <Typography variant="h1" component="h1" className="mainTitle">
+                            The WordAnalyzer
+                        </Typography>
+                        <Typography variant="body2" component="p" className="appByline">
+                            Showcase by Alexander Gomez
+                        </Typography>
+                    </header>
+                    <div className='appContent'>
+                        {FormViewFactory.create(props.view)}
+                    </div>
+                </>
+            }
+        </main>
     );
 };
 
