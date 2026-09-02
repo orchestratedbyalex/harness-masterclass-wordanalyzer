@@ -1,9 +1,12 @@
 ---
 ticket: T-03
 title: Restyle the responsive input view
-status: open
+status: done
 size: S
 depends_on: T-02
+started: 2026-09-02T13:52:50Z
+verified: 2026-09-02T13:54:07Z edd832d93275
+finished: 2026-09-02T13:54:36Z
 ---
 
 # T-03: Restyle the responsive input view
@@ -23,15 +26,15 @@ Turn the default text-entry state into a focused, accessible, responsive surface
 
 ## Acceptance Criteria
 
-- [ ] The input view uses a calm light surface, clear hierarchy, generous spacing, and the shared component treatment.
-- [ ] The textarea and Analyze action fit without horizontal page scrolling at approximately 320px, 768px, and desktop widths.
-- [ ] Text entry, word counting, and navigation to results behave exactly as characterized in T-01.
-- [ ] Empty or whitespace-only text leaves Analyze disabled and the user on the input view.
-- [ ] The textarea has an accessible name and the word count is announced without interrupting typing.
-- [ ] Keyboard focus is clearly visible on the input and Analyze action.
-- [ ] Entry motion is subtle and respects `prefers-reduced-motion`.
-- [ ] No Redux, analyzer, or action logic changes.
-- [ ] Automated tests and the production build pass.
+- [x] The input view uses a calm light surface, clear hierarchy, generous spacing, and the shared component treatment.
+- [x] The textarea and Analyze action fit without horizontal page scrolling at approximately 320px, 768px, and desktop widths.
+- [x] Text entry, word counting, and navigation to results behave exactly as characterized in T-01.
+- [x] Empty or whitespace-only text leaves Analyze disabled and the user on the input view.
+- [x] The textarea has an accessible name and the word count is announced without interrupting typing.
+- [x] Keyboard focus is clearly visible on the input and Analyze action.
+- [x] Entry motion is subtle and respects `prefers-reduced-motion`.
+- [x] No Redux, analyzer, or action logic changes.
+- [x] Automated tests and the production build pass.
 
 ## Verification
 

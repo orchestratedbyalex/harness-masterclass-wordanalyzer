@@ -21,23 +21,31 @@ const wordFrequencyAnalyzerHelper: WordFrequencyAnalyzerHelper = new WordFrequen
 const TextInput: React.FunctionComponent<ITextInput> = (props: ITextInput) => {
 
     const totalAmountOfWords: number = wordFrequencyAnalyzerHelper.countWordsInText(props.text);
-    const displayCounter: boolean = totalAmountOfWords > 0;
+    const wordCountLabel = `${totalAmountOfWords} ${totalAmountOfWords === 1 ? 'word' : 'words'}`;
 
     return (
         <div className='textInputWrapper'>
             <TextField
                 autoComplete="off"
+                className="textInput"
+                fullWidth
                 id="word-analyzer-text-field"
                 label="Fill in your text..."
                 multiline
-                rows={4}
-                rowsMax={10}
+                rows={6}
+                rowsMax={12}
                 onChange={(ev) => props.onTextChange(ev.target.value)}
                 defaultValue={String(props.text)}
+                inputProps={{ 'aria-describedby': 'word-counter' }}
                 variant="outlined"
             />
-            <Typography className='wordCounterParagraph' gutterBottom>
-                {displayCounter && 'word counter : ' + totalAmountOfWords}
+            <Typography
+                id="word-counter"
+                className='wordCounterParagraph'
+                component="p"
+                aria-live="polite"
+                aria-atomic="true">
+                {wordCountLabel}
             </Typography>
         </div>
     );
