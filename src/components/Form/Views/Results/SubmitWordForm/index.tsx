@@ -15,12 +15,17 @@ const SubmitWordForm: React.FunctionComponent<ISubmitWordForm> = (props: ISubmit
         <div className="frequencyWordInputWrapper">
             <TextField id="frecuencyWordTextField" variant="outlined"
                 className="frequencyWordInput"
+                label="Word to find"
                 value={props.wordToCalculateFrequency}
                 autoComplete="off"
+                inputProps={{ 'aria-describedby': 'frequency-description' }}
                 onKeyDown={props.onKeyDown}
                 onChange={props.onChange} />
-            <div style={{ width: 10 }} />
-            <Button variant="contained" color="primary" onClick={props.onSubmit}>
+            <Button
+                variant="contained"
+                color="primary"
+                disabled={props.wordToCalculateFrequency.length === 0}
+                onClick={props.onSubmit}>
                 OK
             </Button>
         </div>

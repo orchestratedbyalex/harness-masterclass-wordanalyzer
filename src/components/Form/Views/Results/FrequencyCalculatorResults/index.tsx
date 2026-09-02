@@ -16,20 +16,20 @@ const FrequencyCalculatorResults: React.FunctionComponent<IFrequencyCalculatorRe
 
     // local state to manage frecuency word 
     return (
-        <div className="calculatedFrequencyDetails">
+        <div className="calculatedFrequencyDetails" role="status" aria-live="polite">
             <div className="resultsTextWrapper">
                 <Typography variant="overline">
                     found
                 </Typography>
-                <Avatar style={{ backgroundColor: 'green', margin: 5 }}>{props.calculatedFrequency}</Avatar>
+                <Avatar className="frequencyCount">{props.calculatedFrequency}</Avatar>
                 <Typography variant="overline">
                     time(s)
-            </Typography>
+                </Typography>
             </div>
             <div className="imageResultsContainer">
                 {frequencyWordImageExists &&
-                    <Typography variant="caption">and here is an image of it ;-)</Typography>}
-                <Avatar className={avatarClasses.large}
+                    <Typography variant="caption">Image result for {props.wordToCalculateFrequency}</Typography>}
+                <Avatar variant="rounded" className={avatarClasses.large}
                     alt={props.wordToCalculateFrequency}
                     src={props.wordAsImageUrl}>{props.wordToCalculateFrequency.toUpperCase()}</Avatar>
             </div>

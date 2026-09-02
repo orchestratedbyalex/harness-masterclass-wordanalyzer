@@ -1,13 +1,11 @@
 import React from 'react';
 //External libs
-import { Avatar, createStyles, Divider, List, ListItem, ListItemIcon, ListItemText, makeStyles, Paper, TextField, Theme, Typography } from '@material-ui/core';
+import { Avatar, Divider, List, ListItem, ListItemIcon, ListItemText, Paper, TextField, Typography } from '@material-ui/core';
+import { EmojiEvents } from '@material-ui/icons';
 import { connect } from 'react-redux';
 
 // local libs
 import { WordFrequencyAnalyzer } from '../../../../../lib';
-
-// local assets
-import trophy from '../../../../../assets/trophy.png';
 
 //redux
 import { calculateFrequency, clearFrequencyState, setWordToCalculateFrequency } from '../../../../../redux/actions/form';
@@ -22,20 +20,15 @@ import { IWordFrequency } from '../../../../../lib/interfaces/IWordFrequency';
 // constants
 import { top20Colors } from '../../../../../constants/TopFrecuencyColors';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            backgroundColor: theme.palette.background.paper,
-            overflow: 'auto',
-            maxHeight: 220
-        },
-        nested: {
-            paddingLeft: theme.spacing(4),
-        },
-    }),
-);
-
 const wordFrequencyAnalyzer: WordFrequencyAnalyzer = new WordFrequencyAnalyzer();
+
+const normalizeTopNumberOfWords = (value: string): number => {
+    const parsedValue = Number(value);
+
+    if (!Number.isFinite(parsedValue)) return 1;
+
+    return Math.min(100, Math.max(1, Math.floor(parsedValue)));
+}
 
 // dispatch redux actions when clicking a word for frequency calculation and display as highlighted
 const onClickListItem = (wordToCalculate: string, dispatch: any) => {
@@ -48,56 +41,55 @@ const TopWords: React.FunctionComponent<ITopWords> = (props: ITopWords) => {
 
     const [topNumberOfWords, setTopNumberOfWords] = React.useState<number>(3);
 
-    const classes = useStyles();
     const wordFrequencyArray: IWordFrequency[] = wordFrequencyAnalyzer.calculateMostFrequentNWords(props.text, topNumberOfWords);
 
     return (
-        <Paper elevation={1} className="detailsWrapper">
+        <Paper component="section" elevation={0} className="detailsWrapper" aria-labelledby="top-words-heading">
             <div className="detailsHeader">
-                <Avatar variant="square" alt="Winners" src={trophy} />
-                <Typography variant="button">Top</Typography>
+                <div className="resultIcon" aria-hidden="true">
+                    <EmojiEvents />
+                </div>
+                <Typography id="top-words-heading" variant="h6" component="h3" className="detailsTitle">
+                    Top words
+                </Typography>
+            </div>
+            <Divider />
+            <div className="topWordsControl">
+                <Typography variant="body2" component="span">Show</Typography>
                 <TextField
                     autoComplete="off"
                     className="topWordsAmountTextField"
                     id="topWordsTextField"
-                    defaultValue={topNumberOfWords}
-                    onChange={(ev) => setTopNumberOfWords(Number(ev.target.value))}
-                    label=""
-                    InputProps={{
-                        inputProps: { 
-                            max: 100, min: 1 
-                        }
+                    value={topNumberOfWords}
+                    onChange={(ev) => setTopNumberOfWords(normalizeTopNumberOfWords(ev.target.value))}
+                    inputProps={{
+                        max: 100,
+                        min: 1,
+                        'aria-label': 'Number of top words',
                     }}
                     type="number"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
                     variant="outlined"
                 />
-                <Typography variant="button">Words</Typography>
+                <Typography variant="body2" component="span">words</Typography>
             </div>
-            <Divider variant="middle" />
             <List
                 component="nav"
-                aria-labelledby="nested-list-subheader"
-                className={classes.root}
+                aria-labelledby="top-words-heading"
+                className="resultList"
             >
-                <li>
-                    <Typography
-                        className='frequencyTitle'
-                        color="textSecondary"
-                        display="block"
-                        variant="caption"
-                    >
-                        Frequency
-                    </Typography>
-                </li>
+                <Typography className='frequencyTitle' component="p">Frequency</Typography>
                 {
                     wordFrequencyArray.map((word, index) => {
                         return (
-                            <ListItem button key={word.getWord() + "_" + word.getFrequency() + "__li"} onClick={(ev) => onClickListItem(word.getWord(), props.dispatch)}>
+                            <ListItem
+                                button
+                                aria-label={`${word.getWord()}, ${word.getFrequency()} occurrences`}
+                                key={word.getWord() + "_" + word.getFrequency() + "__li"}
+                                onClick={() => onClickListItem(word.getWord(), props.dispatch)}>
                                 <ListItemIcon>
-                                    <Avatar style={{ backgroundColor: top20Colors[index] }}>{word.getFrequency()}</Avatar>
+                                    <Avatar className="frequencyBadge" style={{ backgroundColor: top20Colors[index % top20Colors.length] }}>
+                                        {word.getFrequency()}
+                                    </Avatar>
                                 </ListItemIcon>
                                 <ListItemText primary={word.getWord()} />
                             </ListItem>
@@ -106,7 +98,6 @@ const TopWords: React.FunctionComponent<ITopWords> = (props: ITopWords) => {
                 }
             </List>
         </Paper>
-
     );
 };
 

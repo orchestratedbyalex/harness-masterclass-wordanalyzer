@@ -85,4 +85,39 @@ describe('<WordAnalyzerApp /> user flow', () => {
     await waitFor(() => expect(mockFetch).not.toHaveBeenCalled());
     expect(screen.getByRole('button', { name: /start again/i })).toBeInTheDocument();
   });
+
+  test('clamps the number of top words before calculating the result list', async () => {
+    render(<WordAnalyzerApp />);
+
+    await enterTextAndAnalyze('apple apple pear');
+
+    const topWordsInput = screen.getByLabelText(/number of top words/i);
+
+    fireEvent.change(topWordsInput, { target: { value: '1000' } });
+    expect(topWordsInput).toHaveValue(100);
+
+    fireEvent.change(topWordsInput, { target: { value: '0' } });
+    expect(topWordsInput).toHaveValue(1);
+
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  test('keeps a calculated result usable when the image service finds no image', async () => {
+    mockFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ hits: [] }),
+      }),
+    );
+    render(<WordAnalyzerApp />);
+
+    await enterTextAndAnalyze('apple apple pear');
+
+    const frequencyInput = screen.getByLabelText(/word to find/i);
+    fireEvent.change(frequencyInput, { target: { value: 'apple' } });
+    fireEvent.click(screen.getByRole('button', { name: 'OK' }));
+
+    await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
+    expect(await screen.findByText('APPLE')).toBeInTheDocument();
+    expect(screen.queryByAltText('apple')).not.toBeInTheDocument();
+  });
 });
