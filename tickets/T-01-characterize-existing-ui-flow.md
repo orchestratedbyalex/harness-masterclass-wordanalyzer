@@ -1,9 +1,12 @@
 ---
 ticket: T-01
 title: Characterize the existing UI flow
-status: open
+status: done
 size: M
 depends_on: none
+started: 2026-09-02T13:44:42Z
+verified: 2026-09-02T13:46:53Z e47390009486
+finished: 2026-09-02T13:47:40Z
 ---
 
 # T-01: Characterize the existing UI flow
@@ -24,16 +27,16 @@ Create the brownfield walking skeleton by pinning the current end-to-end user jo
 
 ## Acceptance Criteria
 
-- [ ] A valid text entry enables Analyze, opens the results view, and Start Again returns to an empty default view.
-- [ ] Clicking a result word and submitting a frequency query preserve the current highlighting/calculation behavior.
-- [ ] Pressing Enter in the frequency field follows the same path as its submit button.
-- [ ] Empty or whitespace-only source text keeps Analyze disabled and cannot navigate to results.
-- [ ] An empty/non-letter frequency query does not make a live third-party request and does not crash the view.
-- [ ] All third-party requests are mocked in the integration test.
-- [ ] `.env.example` exists, states that this restyle requires no environment variables, and contains no credential value.
-- [ ] `.gitignore` ignores `.env` and `.env.*` but explicitly permits `.env.example`.
-- [ ] Existing production files remain unchanged in this ticket.
-- [ ] The complete automated test suite passes.
+- [x] A valid text entry enables Analyze, opens the results view, and Start Again returns to an empty default view.
+- [x] Clicking a result word and submitting a frequency query preserve the current highlighting/calculation behavior.
+- [x] Pressing Enter in the frequency field follows the same path as its submit button.
+- [x] Empty or whitespace-only source text keeps Analyze disabled and cannot navigate to results.
+- [x] An empty/non-letter frequency query does not make a live third-party request and does not crash the view.
+- [x] All third-party requests are mocked in the integration test.
+- [x] `.env.example` exists, states that this restyle requires no environment variables, and contains no credential value.
+- [x] `.gitignore` ignores `.env` and `.env.*` but explicitly permits `.env.example`.
+- [x] Existing production files remain unchanged in this ticket.
+- [x] The complete automated test suite passes.
 
 ## Verification
 
