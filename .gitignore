@@ -24,7 +24,7 @@ pnpm-debug.log*
 # local agent settings
 .claude/settings.local.json
 
-# secrets (added by pincer init)
+# secrets
 .env
 .env.*
 !.env.example
