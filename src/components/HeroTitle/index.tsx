@@ -35,7 +35,7 @@ const HeroTitle: React.FunctionComponent = () => {
                 createHeroScene(
                     stage,
                     TITLE,
-                    `${process.env.PUBLIC_URL}/fonts/anton.woff`,
+                    `${process.env.PUBLIC_URL}/fonts/michroma.woff`,
                     (progress) => {
                         if (headingRef.current) headingRef.current.style.opacity = String(1 - progress);
                     },
