@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 
 // local componets
 import AppLoader from '../Loader';
+import HeroTitle from '../HeroTitle';
 
 // interfaces
 import { IForm } from '../../interfaces/IForm';
@@ -23,9 +24,7 @@ const Form: React.FunctionComponent<IForm> = (props: IForm) => {
                 :
                 <>
                     <header className='appHeader'>
-                        <Typography variant="h1" component="h1" className="mainTitle">
-                            The WordAnalyzer
-                        </Typography>
+                        <HeroTitle />
                         <Typography variant="body2" component="p" className="appByline">
                             Showcase by Alexander Gomez
                         </Typography>
