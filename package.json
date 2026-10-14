@@ -53,7 +53,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://www.machinedevops.com/wordanalyzer",
+  "homepage": "https://orchestratedbyalex.github.io/harness-masterclass-wordanalyzer/",
   "devDependencies": {
     "ajv": "^8.20.0"
   }
