@@ -1,0 +1,20 @@
+{
+  "version": "0.2.2",
+  "platforms": [
+    "codex"
+  ],
+  "files": {
+    ".agents/skills/pincer-code/SKILL.md": "96ec185f1e28cd29fe6426a8f1da42ab3782ff2bd2d15eabde9923ba6e586ae1",
+    ".agents/skills/pincer-evaluate/SKILL.md": "b20b8e04f03937a1f5bf51b76fdcd039aa27d3378930d7fd8d75c6f712b78196",
+    ".agents/skills/pincer-narrow/SKILL.md": "b8c1e1f27343e0e820bc13a76e81cdef1f247bf30e043f318d62da3cac2bd0a8",
+    ".agents/skills/pincer-plan/SKILL.md": "e6ffc97b6c4c08138ecc11153f850a9534d93d4005c220937b6d2fa89a0dd13b",
+    ".agents/skills/pincer-release/SKILL.md": "7e5714b463c08c4b2b0a57b18cabea738d1c3c1a2e1b5c663676e93305db9d2d",
+    ".agents/skills/pincer-status/SKILL.md": "5f186b3492d388ada6b5e65e26d3d5cdb3472b4e1cd23827e12daf447ba75ca3",
+    ".codex/README.md": "276bbb5fc0afc89ea598b21a23637fef766b201f6e5922b6e0a4d2594f55c21c",
+    "AGENTS.md": "692f13ed9d54581be108f77fcb7bc6f4b10a332e67adc8027c99a55aae7f5129",
+    "docs/dry-run-checklist.md": "79376fc1a0aa4f3428c7e43eec7b9a8828a58497e839ccb5b085a772ed8ae53c",
+    "scripts/pincer-status.sh": "c0828bc7530fa58865cc48eba91b38af8cfe9e12aa6a1a2d458450def917b8f4",
+    "scripts/pincer-ticket.sh": "1ebadd77a8f38611bec337235c2ce77dfa47b532c6a6728e73ac68054420f2de",
+    "scripts/sync-prompts.sh": "71d3efa558477088d6d007d13dbaf0249ca390ee4bddf68bb96ea178add7323f"
+  }
+}
