@@ -6,10 +6,10 @@ The only repository is `orchestratedbyalex/harness-masterclass-wordanalyzer` (gi
 
 | Activity | Where work happens | Where the record lives |
 |---|---|---|
-| Defining a task | A Claude Code conversation in this project folder | GitHub ticket |
+| Defining a task | A Claude Code conversation in this project folder | GitHub ticket, opened by the user |
 | Writing code | Locally, in this project folder | Local git commits, plus a pull request that links back to the ticket |
 | Running tests and checks | Locally | Pull request body: say what was run and the result |
-| Reviewing and merging | GitHub | The pull request; merging closes the linked ticket (use `Closes #N`) |
+| Reviewing and merging | The conversation: the user approves from the summary, then Claude merges | The pull request; merging closes the linked ticket (use `Closes #N`) |
 | Building and deploying | GitHub Actions (`.github/workflows/deploy-pages.yml`), on every push to `main` | GitHub Pages at https://orchestratedbyalex.github.io/harness-masterclass-wordanalyzer/; deploy history in the Actions tab |
 
 A conversation is where a task gets worked out, not its record — write the outcome into the ticket.
@@ -17,9 +17,27 @@ A conversation is where a task gets worked out, not its record — write the out
 ## Handoffs
 
 - **Starting a session:** before asking for context, read the open tickets and their comments, then say in two or three lines where things stand. No open ticket means no work in progress.
-- **Opening a ticket:** as soon as a request becomes a task, open a short ticket with the request and a first "Done when"; fill in the scope as it firms up.
-- **Logging decisions:** when a decision in the conversation changes scope or direction (e.g. making the repo public, adding work, leaving a follow-up open), add a one-line comment to the ticket: decision, why, and any open follow-up. Small choices stay in the conversation. Never put a secret in a comment; the repo is public.
-- **Before merging:** the summary given in the conversation is also the pull request body, word for word: what changed, tests run and their result, anything to decide or know, and `Closes #N`. Point to the ticket instead of restating its scope. Commit messages don't repeat test results.
+- **Opening a ticket:** the user opens a short ticket with the request and a first "Done when". Work starts once the user has explicitly agreed the "Done when"; Claude fills in the scope as it firms up.
+- **Logging decisions:** decisions that change scope or direction are the user's; Claude lays out the options and waits. Claude may decide technical direction itself (e.g. fixing a bug found on the way). Either way, Claude posts a one-line comment on the ticket without asking: decision, why, and any open follow-up. Small choices stay in the conversation. Never put a secret in a comment; the repo is public.
+- **Committing and pushing:** Claude may commit on a feature branch without asking, never directly on `main`. Ask before pushing.
+- **Before merging:** the summary given in the conversation is also the pull request body, word for word: what changed, tests run and their result, anything to decide or know, and `Closes #N`. Point to the ticket instead of restating its scope. Commit messages don't repeat test results. One OK from the user covers pushing and opening the PR. If the work changes afterwards, Claude updates the PR body and posts the new summary in the conversation; each further push still needs an OK.
+- **Merging:** on "merge PR #N", Claude merges only if the PR is still at the commit that was summarised (`--match-head-commit`).
+- **After merging:** Claude watches the deploy run and reports the result. If it fails, Claude reads the logs and explains the cause; the user decides what happens, and a fix starts with a new ticket from the user. If the change affects the site, Claude checks it in a browser before the user looks. When the user says the live site is fine, Claude comments "Accepted on the live site" on the closed ticket.
+- **Changing these rules:** when practice and a rule here differ, Claude points it out; the user decides, and the edit goes through a ticket and PR. Rules live only in this file, not in Claude's memory.
+
+## Who creates, keeps current and accepts each artifact
+
+| Artifact | Creates | Keeps current | Accepts |
+|---|---|---|---|
+| Ticket and "Done when" | The user | Claude | The user, explicitly, before work starts |
+| Decision comment | Claude, without asking | Claude | The user decides scope and direction; Claude may decide technical direction |
+| Commits | Claude, on a feature branch | Claude, until pushed | Local tests pass, then the user approves the merge |
+| Summary / PR body | Claude; one user OK to push and open the PR | Claude, re-posting the summary in the conversation | The user, by approving the merge |
+| Approval ("merge PR #N") | The user | — | Claude merges only if the PR is unchanged |
+| Deploy run | GitHub Actions | Claude watches and reports | A successful run; on failure the user decides |
+| Live site | The deploy | — | The user, by opening it; Claude records the acceptance on the ticket |
+| Pixabay key | The user, in their Pixabay account | The user or Claude may write a value the user gives into `.env.local` | The user |
+| `CLAUDE.md` | Claude drafts, after the user decides | Claude flags drift | The user, by approving the merge |
 
 ## Pipeline and its artifacts
 
@@ -40,8 +58,9 @@ Only the user and Claude use these artifacts.
 
 ## Secrets
 
-- The Pixabay API key lives only in `.env.local` (gitignored) as `REACT_APP_PIXABAY_API_KEY`. `.env.example` names it; never commit a value.
+- The Pixabay API key lives only in `.env.local` (gitignored) as `REACT_APP_PIXABAY_API_KEY`. `.env.example` names it; never commit a value, and never repeat it outside `.env.local`.
 - Create React App embeds `REACT_APP_*` values into the bundle, so the Pages build runs without the key and the app shows no word images there.
+- An old key is still in the public git history. The user accepted the risk and won't rotate it (#5).
 
 ## Commands
 
