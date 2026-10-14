@@ -16,7 +16,12 @@ const enterTextAndAnalyze = async (text: string) => {
 };
 
 describe('<WordAnalyzerApp /> user flow', () => {
+  afterEach(() => {
+    delete process.env.REACT_APP_PIXABAY_API_KEY;
+  });
+
   beforeEach(() => {
+    process.env.REACT_APP_PIXABAY_API_KEY = 'test-key';
     mockFetch.mockImplementation(() =>
       Promise.resolve({
         json: () => Promise.resolve({
@@ -118,6 +123,36 @@ describe('<WordAnalyzerApp /> user flow', () => {
 
     await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
     expect(await screen.findByText('APPLE')).toBeInTheDocument();
+    expect(screen.queryByAltText('apple')).not.toBeInTheDocument();
+  });
+
+  test('keeps a calculated result usable when the image request fails', async () => {
+    mockFetch.mockImplementation(() => Promise.reject(new Error('network down')));
+    render(<WordAnalyzerApp />);
+
+    await enterTextAndAnalyze('apple apple pear');
+
+    const frequencyInput = screen.getByLabelText(/word to find/i);
+    fireEvent.change(frequencyInput, { target: { value: 'apple' } });
+    fireEvent.click(screen.getByRole('button', { name: 'OK' }));
+
+    await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
+    expect(await screen.findByText('APPLE')).toBeInTheDocument();
+    expect(screen.queryByAltText('apple')).not.toBeInTheDocument();
+  });
+
+  test('calculates a result without requesting an image when no API key is configured', async () => {
+    delete process.env.REACT_APP_PIXABAY_API_KEY;
+    render(<WordAnalyzerApp />);
+
+    await enterTextAndAnalyze('apple apple pear');
+
+    const frequencyInput = screen.getByLabelText(/word to find/i);
+    fireEvent.change(frequencyInput, { target: { value: 'apple' } });
+    fireEvent.click(screen.getByRole('button', { name: 'OK' }));
+
+    expect(await screen.findByText('APPLE')).toBeInTheDocument();
+    expect(mockFetch).not.toHaveBeenCalled();
     expect(screen.queryByAltText('apple')).not.toBeInTheDocument();
   });
 

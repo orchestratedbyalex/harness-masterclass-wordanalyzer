@@ -1,13 +1,15 @@
-
-
 export class ImageFetcher {
 
-    private apiKey: string = '21212178-63f45bee2411a5baefa91a840';
-    private API: string = 'https://pixabay.com/api/?key='+this.apiKey;
+    private API: string = 'https://pixabay.com/api/';
 
-    public fetchImageFromWord = async (word: string): Promise<string> => {
-        
-        let response  = await fetch(this.API+"&q="+word+"&image_type=photo&pretty=true")
+    public fetchImageFromWord = async (word: string): Promise<any> => {
+        // the key is only set locally (.env.local); without it, skip the image
+        const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
+        if (!apiKey) {
+            return { hits: [] };
+        }
+
+        let response  = await fetch(this.API+"?key="+apiKey+"&q="+word+"&image_type=photo&pretty=true")
             .then(response => response.json())
             .catch(error => error);
 
