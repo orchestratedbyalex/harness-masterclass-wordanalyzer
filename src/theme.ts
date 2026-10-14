@@ -61,7 +61,7 @@ const theme = createMuiTheme({
         padding: '10px 20px',
         transition: 'background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease',
         '&:focus-visible': {
-          outline: '3px solid rgba(0, 102, 204, 0.3)',
+          outline: '3px solid #0066cc',
           outlineOffset: 2,
         },
       },
@@ -93,7 +93,7 @@ const theme = createMuiTheme({
       button: {
         borderRadius: 10,
         '&:focus-visible': {
-          outline: '3px solid rgba(0, 102, 204, 0.3)',
+          outline: '3px solid #0066cc',
           outlineOffset: -2,
         },
       },

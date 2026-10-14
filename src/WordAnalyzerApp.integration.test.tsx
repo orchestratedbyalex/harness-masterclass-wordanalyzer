@@ -120,4 +120,25 @@ describe('<WordAnalyzerApp /> user flow', () => {
     expect(await screen.findByText('APPLE')).toBeInTheDocument();
     expect(screen.queryByAltText('apple')).not.toBeInTheDocument();
   });
+
+  test('exposes coherent landmarks, headings, and accessible control names', async () => {
+    render(<WordAnalyzerApp />);
+
+    expect(screen.getByRole('main')).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: /the wordanalyzer/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: /see what stands out/i })).toBeInTheDocument();
+    expect(screen.getByLabelText(/fill in your text/i)).toHaveAttribute('aria-describedby', 'word-counter');
+
+    await enterTextAndAnalyze('apple apple pear');
+
+    expect(screen.getByRole('heading', { level: 2, name: /your word profile/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /analyzed text/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /top words/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /highest frequency/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /frequency calculator/i })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: /top words/i })).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: /highest frequency/i })).toBeInTheDocument();
+    expect(screen.getByLabelText(/number of top words/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/word to find/i)).toHaveAttribute('aria-describedby', 'frequency-description');
+  });
 });

@@ -8,7 +8,7 @@
   --color-border: rgba(29, 29, 31, 0.12);
   --color-accent: #0066cc;
   --color-accent-strong: #004f9e;
-  --color-focus: rgba(0, 102, 204, 0.3);
+  --color-focus: #0066cc;
   --shadow-surface: 0 18px 60px rgba(29, 29, 31, 0.08);
   --shadow-control: 0 8px 24px rgba(29, 29, 31, 0.08);
   --radius-small: 10px;
