@@ -8,7 +8,7 @@ The only repository is `orchestratedbyalex/harness-masterclass-wordanalyzer` (gi
 |---|---|---|
 | Defining a task | A Claude Code conversation in this project folder | GitHub ticket, opened by the user |
 | Writing code | Locally, in this project folder | Local git commits, plus a pull request that links back to the ticket |
-| Running tests and checks | Locally | Pull request body: say what was run and the result |
+| Running tests and checks | Locally, then GitHub Actions (`.github/workflows/ci.yml`) on every pull request | Pull request body for the local run; the CI check on the pull request |
 | Reviewing and merging | The conversation: the user approves from the summary, then Claude merges | The pull request; merging closes the linked ticket (use `Closes #N`) |
 | Building and deploying | GitHub Actions (`.github/workflows/deploy-pages.yml`), on every push to `main` | GitHub Pages at https://orchestratedbyalex.github.io/harness-masterclass-wordanalyzer/; deploy history in the Actions tab |
 
@@ -24,6 +24,17 @@ A conversation is where a task gets worked out, not its record — write the out
 - **Merging:** on "merge PR #N", Claude merges only if the PR is still at the commit that was summarised (`--match-head-commit`).
 - **After merging:** Claude watches the deploy run and reports the result. If it fails, Claude reads the logs and explains the cause; the user decides what happens, and a fix starts with a new ticket from the user. If the change affects the site, Claude checks it in a browser before the user looks. When the user says the live site is fine, Claude comments "Accepted on the live site" on the closed ticket.
 - **Changing these rules:** when practice and a rule here differ, Claude points it out; the user decides, and the edit goes through a ticket and PR. Rules live only in this file, not in Claude's memory.
+
+## Git practices
+
+One person (the user) works in this repo, with one Claude session at a time.
+
+- **Separating work:** one branch per ticket, named `type/N-short-name` (e.g. `docs/7-fill-artifact-roles`), branched from `main`. One ticket in progress at a time.
+- **Identity:** commits use `orchestratedbyalex <88491491+orchestratedbyalex@users.noreply.github.com>`, set in this repo's git config.
+- **Checking changes:** Claude runs `CI=true pnpm test` locally before pushing. The CI workflow runs the tests and the build on every pull request.
+- **Protecting `main`:** a GitHub ruleset blocks direct pushes to `main` and requires the CI check to pass before merging. Only the user may use the admin bypass; Claude never does, even though `gh` runs as the user.
+- **Integrating:** pull requests are merged with a merge commit; squash and rebase merging are turned off.
+- **Cleanup:** GitHub deletes the branch on merge; Claude then deletes the local branch and prunes without asking.
 
 ## Who creates, keeps current and accepts each artifact
 
