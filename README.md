@@ -32,22 +32,22 @@ As the user clicks this button, it will clear the text field for a new operation
 
 ## Available Scripts
 
-In the project directory, you can run:
+Install dependencies with [pnpm](https://pnpm.io) (`pnpm install`), then in the project directory you can run:
 
-### `yarn start`
+### `pnpm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000/wordanalyzer](http://localhost:3000/wordanalyzer) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `pnpm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `pnpm build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.

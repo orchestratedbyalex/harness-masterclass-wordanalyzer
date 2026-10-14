@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { startLoader, stopLoader, setError } from './application';
 import initializeWatchers from './watchers';
+import { toAppError } from '../../models/IError';
 
 
 export default function* startUp(): any {
@@ -21,7 +22,7 @@ export default function* startUp(): any {
 
     catch (err) {
         console.log(err);
-        yield put(setError(err));
+        yield put(setError(toAppError(err)));
     }
 
     finally {

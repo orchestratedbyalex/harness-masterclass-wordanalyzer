@@ -1,6 +1,7 @@
 import { all, fork, put } from "@redux-saga/core/effects";
 import { setError } from "./application";
 import { formWatchers } from "./form";
+import { toAppError } from "../../models/IError";
 
 
 export default function* initializeWatchers(): any {
@@ -14,7 +15,7 @@ export default function* initializeWatchers(): any {
 
     }
     catch (err) {
-        yield put(setError(err));
+        yield put(setError(toAppError(err)));
     }
 
 }
