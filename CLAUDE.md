@@ -16,7 +16,7 @@ Read this before starting work; the sections below give the detail.
 Read the open tickets → request → ticket with "Done when" (agreed before work starts) → branch → build and test locally → summary and OK to push → PR with CI → "merge PR #N" → deploy → check the live site → acceptance recorded on the ticket.
 
 ### 3 Handoff artifacts
-- **Ticket:** the request plus "Done when".
+- **Ticket:** written from [`templates/ticket.md`](templates/ticket.md); finished example: #11. Reuse of the template is not yet tested on a second ticket.
 - **Decision comments:** only for changes to scope or direction.
 - **Commits:** no test lines.
 - **Summary:** shown in the conversation and used as the PR body (changes, tests, warnings, `Closes #N`).
@@ -30,8 +30,8 @@ Read the open tickets → request → ticket with "Done when" (agreed before wor
 - Merging and the live-site check stay as they are.
 
 ### 5 Responsibility
-- **The user decides:** the ticket and "Done when", scope and direction, pushing, merging, accepting the live site, what to do after a failed deploy, the key, the rules.
-- **Claude does:** keeps the ticket current, makes and logs technical decisions, commits locally, writes the summary, merges on the user's word if the PR is unchanged, watches deploys, checks the site when the UI changed.
+- **The user decides:** what to ask for, agreeing the "Done when", scope and direction, pushing, merging, accepting the live site, what to do after a failed deploy, the key, the rules.
+- **Claude does:** opens tickets from the user's request and keeps them current, makes and logs technical decisions, commits locally, writes the summary, merges on the user's word if the PR is unchanged, watches deploys, checks the site when the UI changed.
 
 ### 6 Repo
 - **People:** one person, one Claude session at a time.
@@ -47,7 +47,7 @@ The only repository is `orchestratedbyalex/harness-masterclass-wordanalyzer` (gi
 
 | Activity | Where work happens | Where the record lives |
 |---|---|---|
-| Defining a task | A Claude Code conversation in this project folder | GitHub ticket, opened by the user |
+| Defining a task | A Claude Code conversation in this project folder | GitHub ticket, opened by Claude from the user's request |
 | Writing code | Locally, in this project folder | Local git commits, plus a pull request that links back to the ticket |
 | Running tests and checks | Locally, then GitHub Actions (`.github/workflows/ci.yml`) on every pull request | Pull request body for the local run; the CI check on the pull request |
 | Reviewing and merging | The conversation: the user approves from the summary, then Claude merges | The pull request; merging closes the linked ticket (use `Closes #N`) |
@@ -58,12 +58,12 @@ A conversation is where a task gets worked out, not its record — write the out
 ## Handoffs
 
 - **Starting a session:** before asking for context, read the open tickets and their comments, then say in two or three lines where things stand. No open ticket means no work in progress.
-- **Opening a ticket:** the user opens a short ticket with the request and a first "Done when". Work starts once the user has explicitly agreed the "Done when"; Claude fills in the scope as it firms up.
+- **Opening a ticket:** Claude opens the ticket from the user's request, using [`templates/ticket.md`](templates/ticket.md), with a first "Done when". Work starts once the user has explicitly agreed the "Done when"; Claude then records it on the ticket's "Done when agreed" line and fills in the scope as it firms up.
 - **Logging decisions:** decisions that change scope or direction are the user's; Claude lays out the options and waits. Claude may decide technical direction itself (e.g. fixing a bug found on the way). Either way, Claude posts a one-line comment on the ticket without asking: decision, why, and any open follow-up. Small choices stay in the conversation. Never put a secret in a comment; the repo is public.
 - **Committing and pushing:** Claude may commit on a feature branch without asking, never directly on `main`. Ask before pushing.
 - **Before merging:** the summary given in the conversation is also the pull request body, word for word: what changed, tests run and their result, anything to decide or know, and `Closes #N`. Point to the ticket instead of restating its scope. Commit messages don't repeat test results. One OK from the user covers pushing and opening the PR. If the work changes afterwards, Claude updates the PR body and posts the new summary in the conversation; each further push still needs an OK.
 - **Merging:** on "merge PR #N", Claude merges only if the PR is still at the commit that was summarised (`--match-head-commit`).
-- **After merging:** Claude watches the deploy run and reports the result. If it fails, Claude reads the logs and explains the cause; the user decides what happens, and a fix starts with a new ticket from the user. If the change affects the site, Claude checks it in a browser before the user looks. When the user says the live site is fine, Claude comments "Accepted on the live site" on the closed ticket.
+- **After merging:** Claude watches the deploy run and reports the result. If it fails, Claude reads the logs and explains the cause; the user decides what happens, and a fix starts with a new ticket. If the change affects the site, Claude checks it in a browser before the user looks. When the user says the live site is fine, Claude comments "Accepted on the live site" on the closed ticket.
 - **Changing these rules:** when practice and a rule here differ, Claude points it out; the user decides, and the edit goes through a ticket and PR. Rules live only in this file, not in Claude's memory.
 
 ## Git practices
@@ -81,13 +81,13 @@ One person (the user) works in this repo, with one Claude session at a time.
 
 | Artifact | Creates | Keeps current | Accepts |
 |---|---|---|---|
-| Ticket and "Done when" | The user | Claude | The user, explicitly, before work starts |
+| Ticket and "Done when" | Claude, from the user's request, using `templates/ticket.md` | Claude | The user, explicitly agreeing the "Done when" before work starts |
 | Decision comment | Claude, without asking | Claude | The user decides scope and direction; Claude may decide technical direction |
 | Commits | Claude, on a feature branch | Claude, until pushed | Local tests pass, then the user approves the merge |
 | Summary / PR body | Claude; one user OK to push and open the PR | Claude, re-posting the summary in the conversation | The user, by approving the merge |
 | Approval ("merge PR #N") | The user | Not applicable: if the PR changes, the user gives a new approval | Claude, by checking the PR is unchanged since the summary |
 | Deploy run | GitHub Actions | Claude watches and reports | Claude, on success; the user, on failure |
-| Live site | The deploy | Claude keeps it working and raises problems; fixes start with a ticket from the user | The user, by opening it; Claude records the acceptance on the ticket |
+| Live site | The deploy | Claude keeps it working and raises problems; fixes start with a new ticket | The user, by opening it; Claude records the acceptance on the ticket |
 | Pixabay key | The user, in their Pixabay account | The user or Claude may write a value the user gives into `.env.local` | The user |
 | `CLAUDE.md` | Claude drafts, after the user decides | Claude flags drift | The user, by approving the merge |
 
