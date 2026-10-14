@@ -92,7 +92,7 @@ export function* onCalculateFrequency() {
     let wordAsImageUrl = '';
     if (calculatedFrequency !== undefined && calculatedFrequency > 0) {
         let imageResponse:any = yield imageFetcher.fetchImageFromWord(state.form.wordToCalculateFrequency);
-        if (imageResponse && imageResponse.hits.length > 0) {
+        if (imageResponse && imageResponse.hits && imageResponse.hits.length > 0) {
             wordAsImageUrl = imageResponse.hits[0].previewURL;
         }
     }

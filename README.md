@@ -34,10 +34,12 @@ As the user clicks this button, it will clear the text field for a new operation
 
 Install dependencies with [pnpm](https://pnpm.io) (`pnpm install`), then in the project directory you can run:
 
+To show a photo for the word in the Frequency Calculator, copy `.env.example` to `.env.local` and set `REACT_APP_PIXABAY_API_KEY`. `.env.local` is gitignored; without a key the app still works, just without photos.
+
 ### `pnpm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000/wordanalyzer](http://localhost:3000/wordanalyzer) to view it in the browser.
+Open [http://localhost:3000/harness-masterclass-wordanalyzer](http://localhost:3000/harness-masterclass-wordanalyzer) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
@@ -51,4 +53,8 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy-pages.yml`, which builds the app and publishes it to [GitHub Pages](https://orchestratedbyalex.github.io/harness-masterclass-wordanalyzer/). Deploy history is in the repository's Actions tab.
 
