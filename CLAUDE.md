@@ -1,5 +1,46 @@
 # wordAnalyzer
 
+## Harness agreement — orchestratedbyalex + Claude · wordAnalyzer
+
+Read this before starting work; the sections below give the detail.
+
+### 1 Systems
+- **Repo:** `orchestratedbyalex/harness-masterclass-wordanalyzer`, branch `main`. Ignore every other copy.
+- **Define:** in a Claude Code conversation, recorded as a GitHub ticket.
+- **Build and test:** locally, recorded in commits, the PR and the CI check.
+- **Approve:** in the conversation, recorded in the PR.
+- **Deploy:** GitHub Actions to Pages on every push to `main`.
+- **Secrets:** the Pixabay key exists only in `.env.local`, so Pages shows no images.
+
+### 2 Current pipeline
+Read the open tickets → request → ticket with "Done when" (agreed before work starts) → branch → build and test locally → summary and OK to push → PR with CI → "merge PR #N" → deploy → check the live site → acceptance recorded on the ticket.
+
+### 3 Handoff artifacts
+- **Ticket:** the request plus "Done when".
+- **Decision comments:** only for changes to scope or direction.
+- **Commits:** no test lines.
+- **Summary:** shown in the conversation and used as the PR body (changes, tests, warnings, `Closes #N`).
+- **CI check**, **"merge PR #N"**, **deploy run**, **live site**.
+
+### 4 Simplify
+- Open the ticket early and log only the decisions that matter.
+- Write the summary once and use it in both the conversation and the PR.
+- Test results go in the PR, not in commits.
+- Each session starts from the open tickets.
+- Merging and the live-site check stay as they are.
+
+### 5 Responsibility
+- **The user decides:** the ticket and "Done when", scope and direction, pushing, merging, accepting the live site, what to do after a failed deploy, the key, the rules.
+- **Claude does:** keeps the ticket current, makes and logs technical decisions, commits locally, writes the summary, merges on the user's word if the PR is unchanged, watches deploys, checks the site when the UI changed.
+
+### 6 Repo
+- **People:** one person, one Claude session at a time.
+- **Branches:** one per ticket, `type/N-short-name`, branched from `main`.
+- **Checks:** local tests plus CI on every PR.
+- **`main`:** a ruleset requires a PR and a green check. Only the user may bypass it.
+- **Merging:** merge commits only; branches auto-delete on merge.
+- **Identity:** `orchestratedbyalex`.
+
 ## Systems: where work happens vs. where its record lives
 
 The only repository is `orchestratedbyalex/harness-masterclass-wordanalyzer` (git remote `origin`); its main branch is `main`. Ignore any other copies of this project.
