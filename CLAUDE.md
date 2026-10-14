@@ -33,9 +33,9 @@ A conversation is where a task gets worked out, not its record — write the out
 | Decision comment | Claude, without asking | Claude | The user decides scope and direction; Claude may decide technical direction |
 | Commits | Claude, on a feature branch | Claude, until pushed | Local tests pass, then the user approves the merge |
 | Summary / PR body | Claude; one user OK to push and open the PR | Claude, re-posting the summary in the conversation | The user, by approving the merge |
-| Approval ("merge PR #N") | The user | — | Claude merges only if the PR is unchanged |
-| Deploy run | GitHub Actions | Claude watches and reports | A successful run; on failure the user decides |
-| Live site | The deploy | — | The user, by opening it; Claude records the acceptance on the ticket |
+| Approval ("merge PR #N") | The user | Not applicable: if the PR changes, the user gives a new approval | Claude, by checking the PR is unchanged since the summary |
+| Deploy run | GitHub Actions | Claude watches and reports | Claude, on success; the user, on failure |
+| Live site | The deploy | Claude keeps it working and raises problems; fixes start with a ticket from the user | The user, by opening it; Claude records the acceptance on the ticket |
 | Pixabay key | The user, in their Pixabay account | The user or Claude may write a value the user gives into `.env.local` | The user |
 | `CLAUDE.md` | Claude drafts, after the user decides | Claude flags drift | The user, by approving the merge |
 
