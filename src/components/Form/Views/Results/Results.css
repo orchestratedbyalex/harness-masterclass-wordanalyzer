@@ -1,0 +1,311 @@
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-section);
+    width: 100%;
+    min-width: 0;
+    padding: clamp(22px, 4vw, 46px);
+    color: var(--color-text);
+    background: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-surface);
+}
+
+.resultsHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.resultsTitle {
+    color: var(--color-text);
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.resultsDescription {
+    max-width: 680px;
+    margin: 10px 0 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+.paperWrapper {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    min-width: 0;
+}
+
+.resultIcon {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    background: var(--color-page-accent);
+    border: 1px solid rgba(0, 102, 204, 0.12);
+    border-radius: var(--radius-medium);
+}
+
+.resultIcon .MuiSvgIcon-root {
+    font-size: 1.45rem;
+}
+
+.paperContainer {
+    width: 100%;
+    min-width: 0;
+    padding: 20px 22px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-control);
+}
+
+.sourceTextTitle {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text-muted);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+}
+
+.analyzedText {
+    max-height: 220px;
+    overflow: auto;
+    padding: 2px 4px 2px 0;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.analyzedText:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 4px;
+    border-radius: var(--radius-small);
+}
+
+.YourHighlightClass {
+    padding: 0.08em 0.18em;
+    color: #0b3d6f;
+    background: #dcecff;
+    border-radius: 4px;
+}
+
+.detailsWrapper {
+    display: flex;
+    min-width: 0;
+    min-height: 360px;
+    flex-direction: column;
+    padding: 22px;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-control);
+}
+
+.detailsHeader {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 52px;
+    padding-bottom: 16px;
+}
+
+.detailsHeader .resultIcon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+}
+
+.detailsTitle {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+}
+
+.topWordsControl {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 0 12px;
+    color: var(--color-text-muted);
+}
+
+.topWordsAmountTextField {
+    width: 72px;
+}
+
+.topWordsAmountTextField .MuiOutlinedInput-input {
+    padding: 10px;
+    text-align: center;
+}
+
+.frequencyTitle {
+    margin: 0;
+    padding: 14px 12px 8px;
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.resultList {
+    min-height: 0;
+    max-height: 250px;
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+}
+
+.resultList .MuiListItem-root {
+    margin: 2px 0;
+    padding: 8px 10px;
+}
+
+.resultList .MuiListItemIcon-root {
+    min-width: 46px;
+}
+
+.frequencyBadge {
+    width: 34px;
+    height: 34px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.detailedResultsWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    min-width: 0;
+}
+
+.frequencyDescription {
+    width: 100%;
+    padding: 14px 0 12px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.frequencyWordInputWrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
+
+.frequencyWordInput {
+    min-width: 0;
+}
+
+.calculatedFrequencyDetails {
+    display: grid;
+    grid-template-columns: minmax(74px, auto) minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border);
+}
+
+.frequencyCount {
+    width: 42px;
+    height: 42px;
+    margin: 5px;
+    color: #ffffff;
+    background: #2f6b62;
+    font-weight: 700;
+}
+
+.startAgainButtonWraper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.resultsTextWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.largeAvatar {
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.imageResultsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    color: var(--color-text-muted);
+}
+
+@media (max-width: 960px) {
+    .detailedResultsWrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .detailedResultsWrapper > :last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 680px) {
+    .resultsContainer {
+        gap: 28px;
+    }
+
+    .paperWrapper {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .paperWrapper > .resultIcon {
+        display: none;
+    }
+
+    .detailedResultsWrapper {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detailedResultsWrapper > :last-child {
+        grid-column: auto;
+    }
+
+    .detailsWrapper {
+        min-height: 0;
+    }
+
+    .startAgainButtonWraper .MuiButton-root {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .calculatedFrequencyDetails {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .resultsTextWrapper {
+        flex-direction: row;
+        gap: 8px;
+    }
+}

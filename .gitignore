@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+
+# build and test output
+/build
+/coverage
+
+# this project uses pnpm; other package managers' lockfiles would drift
+package-lock.json
+yarn.lock
+
+# logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# local agent settings
+.claude/settings.local.json
+
+# secrets
+.env
+.env.*
+!.env.example

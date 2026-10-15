@@ -1,0 +1,12 @@
+# Create React App expects a flat, npm-style node_modules; pnpm's symlinked
+# layout makes its ESLint config load twice ("Plugin "react" was conflicted").
+nodeLinker: hoisted
+
+allowBuilds:
+  core-js: false
+  core-js-pure: false
+
+# enzyme accepts any cheerio ^1.0.0-rc.3, but cheerio 1.x final depends on
+# undici, which needs TextDecoder and breaks CRA's Jest (jsdom) environment.
+overrides:
+  cheerio: 1.0.0-rc.12
